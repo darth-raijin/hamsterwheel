@@ -34,10 +34,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-
 
-      # Optional: ensure Cargo.lock is up-to-date for libraries
-      # - name: Check Cargo.lock is up to date
-      #   run: cargo update --locked
-
       - name: Check formatting
         run: cargo fmt --all -- --check
 
