@@ -1,4 +1,4 @@
-name: publish
+name: Publish
 
 on:
   push:
@@ -8,25 +8,39 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
-      - name: Build & test
-        run: |
-          cargo build --all --locked
-          cargo test --all --locked
+          components: rustfmt, clippy
+
+      - name: fmt
+        run: cargo fmt --all -- --check
+
+      - name: clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+      - name: build
+        run: cargo build --all
+
+      - name: test
+        run: cargo test --all
 
   publish:
     runs-on: ubuntu-latest
     needs: build
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
-      - name: Publish to crates.io
+
+      - name: publish
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
-        run: cargo publish --locked --verbose
+        run: cargo publish --verbose
