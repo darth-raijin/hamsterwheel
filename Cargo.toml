@@ -1,0 +1,10 @@
+[package]
+name = "hamsterwheel"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/darth-raijin/hamsterwheel"
+description = "Experimental Rust data structures inspired by simple, fast designs."
+
+[dependencies]
