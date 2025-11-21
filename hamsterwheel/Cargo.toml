@@ -1,0 +1,11 @@
+[package]
+name = "hamsterwheel"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+readme = "../README.md"
+repository = "https://github.com/darth-raijin/hamsterwheel"
+description = "Experimental Rust data structures inspired by simple, fast designs."
+
+[dependencies]
+hamsterwheel-core = { path = "../hamsterwheel-core" }

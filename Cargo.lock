@@ -3,5 +3,16 @@
 version = 4
 
 [[package]]
+name = "examples"
+version = "0.1.0"
+
+[[package]]
 name = "hamsterwheel"
+version = "0.2.0"
+dependencies = [
+ "hamsterwheel-core",
+]
+
+[[package]]
+name = "hamsterwheel-core"
 version = "0.2.0"
