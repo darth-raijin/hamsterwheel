@@ -49,7 +49,10 @@ impl<K, V> LruCache<K, V> {
     }
 }
 
-impl<K: Eq + Hash, V> Cache for LruCache<K, V> {
+impl<K, V> Cache for LruCache<K, V>
+where
+    K: Eq + Hash,
+{
     type Key = K;
     type Value = V;
 
