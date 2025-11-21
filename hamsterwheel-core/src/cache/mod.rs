@@ -1,3 +1,4 @@
 pub mod traits;
-mod lru;
-mod ttl;
+pub mod lru;
+pub mod ttl;
+pub mod cache_metrics;
