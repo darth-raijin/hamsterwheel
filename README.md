@@ -3,6 +3,9 @@
 ![Crates.io](https://img.shields.io/crates/d/hamsterwheel)
 ![Build](https://github.com/nicholassm/disruptor-rs/actions/workflows/build_and_test.yml/badge.svg)
 
+> All commits will be squashed, to remove "funny" commit messages
+---
+
 A collection of cache data structures for Rust, focused on ergonomics, observability, testability, and 100% safe Rust.
 
 The aim is to provide cache primitives that are simple to use, predictable in behavior, and easy to instrument in real services. Every cache is built with clear APIs, first-class metrics, and no hidden complexity. If you're looking for production-friendly caches with strong correctness guarantees and good developer experience, this crate is for you.
