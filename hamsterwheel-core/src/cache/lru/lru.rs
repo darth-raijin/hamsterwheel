@@ -1,8 +1,8 @@
-use std::collections::HashMap;
 use crate::cache::cache_metrics::CacheMetrics;
-use crate::cache::traits::Cache;
-use std::hash::Hash;
 use crate::cache::lru::node::Node;
+use crate::cache::traits::Cache;
+use std::collections::HashMap;
+use std::hash::Hash;
 
 pub struct LruConfig {
     pub capacity: usize,

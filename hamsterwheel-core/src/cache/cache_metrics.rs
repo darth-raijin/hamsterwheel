@@ -8,4 +8,3 @@ pub struct CacheMetrics {
     pub removals: AtomicU64,
     pub memory_usage_bytes: AtomicU64,
 }
-

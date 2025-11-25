@@ -1,2 +1,1 @@
-pub struct LruCacheBuilder {
-}
+pub struct LruCacheBuilder {}

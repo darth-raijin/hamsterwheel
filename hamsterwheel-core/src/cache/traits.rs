@@ -1,5 +1,5 @@
-use std::hash::Hash;
 use crate::cache::cache_metrics::CacheMetrics;
+use std::hash::Hash;
 
 pub trait Cache {
     type Key: Eq + Hash;
@@ -36,11 +36,7 @@ pub trait Cache {
     ///
     /// Returns the *previous* value if there was one, so callers can
     /// reuse or drop it explicitly.
-    fn put(
-        &mut self,
-        key: Self::Key,
-        value: Self::Value,
-    ) -> Option<Self::Value>;
+    fn put(&mut self, key: Self::Key, value: Self::Value) -> Option<Self::Value>;
 
     /// Remove a key, if present, returning the owned value.
     fn remove(&mut self, key: &Self::Key) -> Option<Self::Value>;
