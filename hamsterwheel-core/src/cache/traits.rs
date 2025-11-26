@@ -4,11 +4,11 @@ use std::hash::Hash;
 pub trait Cache {
     type Key: Eq + Hash;
     type Value;
+    type Metrics: CacheMetrics;
 
     /// Lookup without taking ownership.
     ///
-    /// For LRU-style implementations, `get` **SHOULD** mark the entry
-    /// as recently used (bump it in the recency order).
+    /// For LRU-style implementations, `get` **SHOULD** mark the entry.
     fn get(&mut self, key: &Self::Key) -> Option<&Self::Value>;
 
     /// Lookup without affecting recency / usage.
@@ -47,14 +47,13 @@ pub trait Cache {
     /// Current number of entries in the cache.
     fn len(&self) -> usize;
 
-    /// Maximum number of entries this cache will store.
     fn capacity(&self) -> usize;
 
     fn is_empty(&self) -> bool {
         self.len() == 0
     }
 
-    fn metrics(&self) -> Option<&CacheMetrics>;
+    fn metrics(&self) -> Option<&Self::Metrics>;
 
     fn reset_metrics(&mut self);
 }

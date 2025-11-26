@@ -9,7 +9,10 @@ pub struct LruConfig {
     pub enable_metrics: bool,
 }
 
-pub struct LruCache<K, V> {
+pub struct LruCache<K, V, M>
+where
+    M: CacheMetrics,
+{
     map: HashMap<K, usize>,
     nodes: Vec<Node<K, V>>,
     head: Option<usize>,
@@ -17,12 +20,15 @@ pub struct LruCache<K, V> {
     free_list: Vec<usize>,
     len: usize,
     capacity: usize,
-    cache_metrics: Option<CacheMetrics>,
+    cache_metrics: Option<M>,
     lru_config: LruConfig,
 }
 
-impl<K, V> LruCache<K, V> {
-    pub fn cache_metrics(&self) -> Option<&CacheMetrics> {
+impl<K, V, M> LruCache<K, V, M>
+where
+    M: CacheMetrics,
+{
+    pub fn cache_metrics(&self) -> Option<M> {
         todo!()
     }
 
@@ -49,12 +55,14 @@ impl<K, V> LruCache<K, V> {
     }
 }
 
-impl<K, V> Cache for LruCache<K, V>
+impl<K, V, M> Cache for LruCache<K, V, M>
 where
     K: Eq + Hash,
+    M: CacheMetrics,
 {
     type Key = K;
     type Value = V;
+    type Metrics = M;
 
     fn get(&mut self, key: &Self::Key) -> Option<&Self::Value> {
         todo!()
@@ -96,7 +104,7 @@ where
         todo!()
     }
 
-    fn metrics(&self) -> Option<&CacheMetrics> {
+    fn metrics(&self) -> Option<&Self::Metrics> {
         todo!()
     }
 
