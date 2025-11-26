@@ -4,6 +4,8 @@ use crate::cache::traits::Cache;
 use std::collections::HashMap;
 use std::hash::Hash;
 
+pub const ERR_ZERO_CAPACITY: &str = "LruCache capacity must be greater than 0";
+
 pub struct LruConfig {
     pub capacity: usize,
     pub enable_metrics: bool,
@@ -28,8 +30,8 @@ impl<K, V, M> LruCache<K, V, M>
 where
     M: CacheMetrics,
 {
-    pub fn cache_metrics(&self) -> Option<M> {
-        todo!()
+    pub fn cache_metrics(&self) -> Option<&M> {
+        self.cache_metrics.as_ref()
     }
 
     pub fn capacity(&self) -> usize {
@@ -110,5 +112,30 @@ where
 
     fn reset_metrics(&mut self) {
         todo!()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::cache::cache_metrics::InMemoryCacheMetrics;
+
+    // Focus: the raw struct + inherent impl (new, capacity, cache_metrics)
+    mod lru_struct {
+        use super::*;
+
+        #[test]
+        #[should_panic(expected = "capacity must be greater than 0")]
+        fn new_with_zero_capacity_panics() {}
+
+        #[test]
+        fn can_create_without_metrics_backend() {}
+
+        #[test]
+        fn can_create_with_metrics_backend() {}
+    }
+
+    mod lru_cache_impl {
+        use super::*;
     }
 }
